@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohan - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fcfcfc;
+            color: #333;
+            /* Added padding-top because the navbar is now fixed and sits on top of content */
+            padding-top: 100px; 
+        }
+
+        /* --- FIXED NAVIGATION BAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px; 
+            background-color: rgba(245, 245, 245, 0.85); /* Semi-transparent */
+            backdrop-filter: blur(12px); /* Modern "Frosted Glass" effect */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12); 
+            position: fixed; /* Locked to the top */
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2000;
+        }
+
+        .nav-logo {
+            width: 60px; 
+            height: 60px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.15) rotate(5deg); 
+        }
+
+        nav .right { margin-right: 10%; }
+        nav ul { display: flex; list-style: none; gap: 45px; }
+        nav ul li a {
+            text-decoration: none;
+            color: #000000; 
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 5px; 
+            transition: color 0.3s ease; 
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;               
+            background-color: #c03a3a; 
+            transform: scaleX(0);      
+            transform-origin: center;  
+            transition: transform 0.3s ease-in-out; 
+        }
+
+        nav ul li a:hover::after { transform: scaleX(1); }
+        nav ul li a:hover { color: #c03a3a; }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            padding: 60px 80px 80px 80px; 
+            display: flex;
+            justify-content: center;
+            margin: 0 40px; 
+        }
+
+        .hero-container {
+            background-color: #ffe4d6; 
+            width: 100%;
+            max-width: 1100px;
+            min-height: 500px; 
+            display: flex;
+            align-items: center; 
+            justify-content: space-between;
+            padding: 60px 50px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); 
+            gap: 40px;
+        }
+
+        .hero-text { flex: 1; min-height: 200px; }
+        .subheading {
+            color: #b03030; 
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h2 {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #111;
+            margin-bottom: 20px;
+        }
+
+        .cursor { display: inline-block; width: 3px; background-color: #111; margin-left: 4px; animation: blink 0.8s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        p.description { font-size: 16px; color: #555; line-height: 1.6; margin-bottom: 30px; }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: #c03a3a;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 35px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(192, 58, 58, 0.2);
+        }
+
+        .hero-btn:hover { background-color: #a02e2e; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(192, 58, 58, 0.3); }
+
+        .hero-image-area { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .hero-image-placeholder {
+            width: 320px;
+            height: 320px;
+            background-color: #ffffff; 
+            border: 2px dashed #c03a3a; 
+            border-radius: 16px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; 
+        }
+
+        .hero-image-placeholder:hover { transform: scale(1.05) rotate(-2deg); box-shadow: 0 15px 35px rgba(192, 58, 58, 0.15); }
+
+        /* --- ABOUT SECTION --- */
+        .about-section { padding: 80px 80px 60px 80px; display: flex; justify-content: center; margin: 0 40px; }
+        .about-container { width: 100%; max-width: 1100px; display: flex; align-items: center; justify-content: space-between; gap: 60px; padding: 40px 15px; }
+        .about-images-wrapper { flex: 1; max-width: 450px; }
+        .about-image-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .img-slot {
+            width: 100%;
+            aspect-ratio: 1; 
+            background-color: #ffffff;
+            border: 2px dashed #c03a3a; 
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .img-slot:nth-child(even) { margin-top: 40px; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+        .about-text { flex: 1.2; }
+        .about-text h2 { font-size: 36px; font-weight: 700; color: #111; margin-bottom: 20px; }
+
+        /* --- PROJECTS SECTION (LIGHT COLOUR FILL) --- */
+        .projects-section {
+            background-color: #fff9f6; /* Very light themed fill */
+            padding: 100px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .projects-header { text-align: center; margin-bottom: 50px; width: 100%; max-width: 1100px; }
+
+        .carousel-container { position: relative; width: 100%; max-width: 1100px; display: flex; align-items: center; }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #c03a3a;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(192, 58, 58, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .scroll-arrow:hover { background-color: #a02e2e; transform: translateY(-50%) scale(1.15); }
+        .left-arrow { left: -30px; }
+        .right-arrow { right: -30px; }
+
+        .projects-wrapper {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            overflow-x: auto; 
+            padding: 20px 10px 40px 10px; 
+            scroll-snap-type: x mandatory; 
+            scrollbar-width: none; /* Hide scrollbar for clean look */
+        }
+
+        .projects-wrapper::-webkit-scrollbar { display: none; }
+
+        .project-card {
+            min-width: 360px; 
+            background-color: #fff;
+            border-radius: 24px;
+            padding: 25px;
+            border: 2px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            scroll-snap-align: start; 
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* POP ANIMATION ON HOVER */
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #c03a3a;
+            box-shadow: 0 20px 40px rgba(192, 58, 58, 0.12); 
+        }
+
+        .project-img {
+            width: 100%;
+            height: 220px;
+            background-color: #fcfcfc;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ZOOM ANIMATION FOR IMAGE SLOT */
+        .project-img::after {
+            content: 'Project Preview';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img::after { transform: translate(-50%, -50%) scale(1.4); color: #c03a3a; }
+
+        .project-info h3 { font-size: 24px; color: #111; margin-bottom: 12px; }
+        .project-info p { font-size: 15px; color: #666; margin-bottom: 25px; line-height: 1.6; }
+
+        .project-link {
+            color: #c03a3a;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section { padding: 100px 80px; display: flex; flex-direction: column; align-items: center; }
+        .contact-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .input-row { display: flex; gap: 20px; }
+        .input-row input { flex: 1; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 12px; background-color: #fcfcfc; transition: all 0.3s ease; outline: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: #c03a3a; background-color: #fff; box-shadow: 0 0 0 4px rgba(192, 58, 58, 0.08); }
+        .submit-btn {
+            background-color: #c03a3a; color: #fff; border: none; padding: 18px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+        }
+        .submit-btn:hover { background-color: #a02e2e; transform: scale(1.02); }
+
+        /* --- ADVANCED SCROLL REVEALS --- */
+        .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .fade-in-left { opacity: 0; transform: translateX(-50px); transition: all 1.2s ease-out; }
+        .fade-in-right { opacity: 0; transform: translateX(50px); transition: all 1.2s ease-out; }
+        
+        /* New Scale-in animation specifically for Project Cards */
+        .pop-in { opacity: 0; transform: scale(0.9); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        .visible { opacity: 1; transform: translate(0) scale(1); }
+    </style>
+</head>
+<body>
+   <header>
+        <nav>
+            <div class="left">
+                <a href="#"><img src="WhatsApp Image 2026-06-02 at 3.08.14 PM.jpeg" alt="Rohan's Logo" class="nav-logo"></a>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">My Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+   </header>
+
+   <main>
+       <section id="home" class="hero-section">
+           <div class="hero-container fade-in-up">
+               <div class="hero-text">
+                   <p class="subheading">Welcome to my space</p>
+                   <h2>
+                       <span id="line1"></span><br>
+                       <span id="line2"></span>
+                       <span id="cursor" class="cursor">|</span>
+                   </h2>
+                   <p class="description">I design and build beautiful, functional digital experiences. I specialize in turning complex ideas into clean, user-friendly code. Explore my portfolio to see what I've been working on recently!</p>
+                   <a href="#" class="hero-btn">Download CV</a>
+               </div>
+               <div class="hero-image-area">
+                   <div class="hero-image-placeholder"></div>
+               </div>
+           </div>
+       </section>
+
+       <section id="about" class="about-section">
+           <div class="about-container">
+               <div class="about-images-wrapper fade-in-right">
+                   <div class="about-image-grid">
+                       <div class="img-slot"></div>
+                       <div class="img-slot"></div>
+                       <div class="img-slot"></div>
+                       <div class="img-slot"></div>
+                   </div>
+               </div>
+               <div class="about-text fade-in-left">
+                   <p class="subheading">Get to know me</p>
+                   <h2>About Me</h2>
+                   <p class="description">I am a passionate creative developer with a strong focus on building user-centric digital experiences. I love blending creativity with technical problem-solving to build websites that don't just look great, but perform flawlessly.</p>
+                   <p class="description">I am dedicated to continuous learning and always striving to push the boundaries of what is possible on the web.</p>
+               </div>
+           </div>
+       </section>
+
+       <section id="projects" class="projects-section">
+           <div class="projects-header fade-in-up">
+               <p class="subheading">Take a look at</p>
+               <h2>My Latest Work</h2>
+           </div>
+
+           <div class="carousel-container pop-in">
+               <button class="scroll-arrow left-arrow" id="scrollLeftBtn">&#10094;</button>
+               <div class="projects-wrapper" id="projectsSlider">
+                   
+                   <div class="project-card">
+                       <div class="project-img"></div>
+                       <div class="project-info">
+                           <h3>E-Commerce App</h3>
+                           <p>A full-stack shopping application featuring real-time updates and secure checkout flows.</p>
+                           <a href="#" class="project-link">View Project &rarr;</a>
+                       </div>
+                   </div>
+
+                   <div class="project-card">
+                       <div class="project-img"></div>
+                       <div class="project-info">
+                           <h3>Weather Dashboard</h3>
+                           <p>Dynamic forecasting tool using real-time API data and animated weather backgrounds.</p>
+                           <a href="#" class="project-link">View Project &rarr;</a>
+                       </div>
+                   </div>
+
+                   <div class="project-card">
+                       <div class="project-img"></div>
+                       <div class="project-info">
+                           <h3>Task Manager</h3>
+                           <p>A productivity app designed for daily goal tracking with drag-and-drop features.</p>
+                           <a href="#" class="project-link">View Project &rarr;</a>
+                       </div>
+                   </div>
+
+                   <div class="project-card">
+                       <div class="project-img"></div>
+                       <div class="project-info">
+                           <h3>Agency Web</h3>
+                           <p>A modern creative agency template featuring GSAP animations and clean typography.</p>
+                           <a href="#" class="project-link">View Project &rarr;</a>
+                       </div>
+                   </div>
+
+               </div>
+               <button class="scroll-arrow right-arrow" id="scrollRightBtn">&#10095;</button>
+           </div>
+       </section>
+
+       <section id="contact" class="contact-section">
+           <div class="contact-header fade-in-up">
+               <p class="subheading">Let's connect</p>
+               <h2>Get In Touch</h2>
+           </div>
+           <div class="contact-container fade-in-up">
+               <form class="contact-form">
+                   <div class="input-row">
+                       <input type="text" placeholder="Your Name" required>
+                       <input type="email" placeholder="Your Email" required>
+                   </div>
+                   <input type="text" placeholder="Subject" required>
+                   <textarea placeholder="Write your message here..." required></textarea>
+                   <button type="submit" class="submit-btn">Send Message</button>
+               </form>
+           </div>
+       </section>
+   </main>
+
+   <script>
+       // TYPEWRITER
+       const textLine1 = "Hi, I'm Rohan.";
+       const textLine2 = "A Creative Designer & Developer.";
+       const speed = 75; 
+       let i = 0, j = 0;
+
+       function typeWriter() {
+           if (i < textLine1.length) {
+               document.getElementById("line1").innerHTML += textLine1.charAt(i); i++;
+               setTimeout(typeWriter, speed);
+           } else if (j === 0) {
+               setTimeout(typeLine2, 300); 
+           }
+       }
+       function typeLine2() {
+           if (j < textLine2.length) {
+               document.getElementById("line2").innerHTML += textLine2.charAt(j); j++;
+               setTimeout(typeLine2, speed);
+           } else {
+               document.getElementById("cursor").style.display = "none";
+           }
+       }
+       window.onload = typeWriter;
+
+       // INTERSECTION OBSERVER
+       const observer = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.classList.add('visible');
+               }
+           });
+       }, { threshold: 0.1 });
+
+       document.querySelectorAll('.fade-in-left, .fade-in-right, .fade-in-up, .pop-in').forEach((el) => {
+           observer.observe(el);
+       });
+
+       // CAROUSEL LOGIC
+       const slider = document.getElementById('projectsSlider');
+       const scrollAmount = 400; 
+
+       document.getElementById('scrollLeftBtn').addEventListener('click', () => {
+           slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+       });
+
+       document.getElementById('scrollRightBtn').addEventListener('click', () => {
+           slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+       });
+   </script>
+</body>
+</html>
