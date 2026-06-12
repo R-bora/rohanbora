@@ -455,6 +455,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav>
@@ -489,7 +490,7 @@
                         <span id="cursor" class="cursor">|</span>
                     </h2>
                     <p class="description">I design and build beautiful, functional digital experiences. I specialize in turning complex ideas into clean, user-friendly code. Explore my portfolio to see what I've been working on recently!</p>
-                    <a href="#" class="hero-btn">Download CV</a>
+                    
                 </div>
                 <img src="my.jpeg" alt="Hero Image" class="hero-image-placeholder">
             </div>
@@ -498,18 +499,40 @@
         <section id="about" class="about-section">
             <div class="about-container">
                 <div class="about-images-wrapper fade-in-right">
-                    <div class="about-image-grid">
-                        <div class="img-slot"></div>
-                        <div class="img-slot"></div>
-                        <div class="img-slot"></div>
-                        <div class="img-slot"></div>
-                    </div>
-                </div>
-                <div class="about-text fade-in-left">
+                    
+<div class="about-image-grid">
+
+<div class="img-slot" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;">
+<h2 style="color:#c03a3a;font-size:42px;">17</h2>
+<p style="font-weight:700;">Years Old</p>
+<p style="font-size:13px;">Young developer passionate about building modern websites.</p>
+</div>
+
+<div class="img-slot" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;">
+<h2 style="color:#c03a3a;font-size:24px;">Full Stack</h2>
+<p style="font-weight:700;">Developer</p>
+<p style="font-size:13px;">Frontend and backend web development enthusiast.</p>
+</div>
+
+<div class="img-slot" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;">
+<h2 style="color:#c03a3a;font-size:24px;">Learning</h2>
+<p style="font-weight:700;">Every Day</p>
+<p style="font-size:13px;">Constantly improving skills through real projects.</p>
+</div>
+
+<div class="img-slot" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;">
+<h2 style="color:#c03a3a;font-size:24px;">Creator</h2>
+<p style="font-weight:700;">Builder</p>
+<p style="font-size:13px;">Turning ideas into functional web experiences.</p>
+</div>
+
+</div>
+</div>
+<div class="about-text fade-in-left">
                     <p class="subheading">Get to know me</p>
                     <h2>About Me</h2>
-                    <p class="description">I am a passionate creative developer with a strong focus on building user-centric digital experiences. I love blending creativity with technical problem-solving to build websites that don't just look great, but perform flawlessly.</p>
-                    <p class="description">I am dedicated to continuous learning and always striving to push the boundaries of what is possible on the web.</p>
+                    <p class="description">Hi, I'm Rohan, a 17-year-old Full Stack Web Developer passionate about creating modern, responsive, and user-friendly web applications. I enjoy transforming ideas into real digital products that combine beautiful design with powerful functionality.</p>
+                    <p class="description">Despite being at the beginning of my professional journey, I have already built multiple projects ranging from AI-powered applications to interactive websites. I continuously learn new technologies, improve my development skills, and challenge myself with real-world projects.</p>
                 </div>
             </div>
         </section>
@@ -522,9 +545,7 @@
 
             <div class="carousel-container pop-in">
                 <button class="scroll-arrow left-arrow" id="scrollLeftBtn">&#10094;</button>
-                <div class="projects-wrapper" id="projectsSlider">
-                    
-                    <div class="project-card">
+                <div class="projects-wrapper" id="projectsSlider"><div class="project-card">
                         <div class="project-img">
                             <img src="voxoculus.jpg.jpeg" alt="Vox Oculus Preview">
                         </div>
@@ -534,40 +555,6 @@
                             <a href="https://voxoculus.vercel.app" target="_blank" class="project-link">View Project &rarr;</a>
                         </div>
                     </div>
-
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="ecommerce.jpg" alt="E-Commerce App">
-                        </div>
-                        <div class="project-info">
-                            <h3>E-Commerce App</h3>
-                            <p>A full-stack shopping application featuring real-time updates and secure checkout flows.</p>
-                            <a href="#" class="project-link">View Project &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="weather.jpg" alt="Weather Dashboard">
-                        </div>
-                        <div class="project-info">
-                            <h3>Weather Dashboard</h3>
-                            <p>Dynamic forecasting tool using real-time API data and animated weather backgrounds.</p>
-                            <a href="#" class="project-link">View Project &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-img">
-                            <img src="taskmanager.jpg" alt="Task Manager">
-                        </div>
-                        <div class="project-info">
-                            <h3>Task Manager</h3>
-                            <p>A productivity app designed for daily goal tracking with drag-and-drop features.</p>
-                            <a href="#" class="project-link">View Project &rarr;</a>
-                        </div>
-                    </div>
-
                 </div>
                 <button class="scroll-arrow right-arrow" id="scrollRightBtn">&#10095;</button>
             </div>
@@ -622,7 +609,7 @@
     <script>
         // TYPEWRITER
         const textLine1 = "Hi, I'm Rohan.";
-        const textLine2 = "A Creative Designer & Developer.";
+        const textLine2 = "Full Stack Web Developer";
         const speed = 75; 
         let i = 0, j = 0;
 
